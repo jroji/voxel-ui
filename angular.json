@@ -26,11 +26,9 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/card/src/test.ts",
-            "tsConfig": "projects/card/tsconfig.spec.json",
-            "karmaConfig": "projects/card/karma.conf.js"
+            "tsConfig": "tsconfig.spec.json"
           }
         }
       }
