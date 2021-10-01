@@ -1,0 +1,37 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { CardComponent } from '../src/public-api';
+
+<Meta
+  title="Voxel-ui/MDX"
+  component={CardComponent}
+  argTypes={{
+    title: {
+      name: 'Card title',
+      description: 'The string to shown on the title',
+      control: {
+        type: 'text',
+      }
+    }
+  }}
+/>
+
+# Checkbox
+
+With `MDX`, we can define a story for `Card component` right in the middle of our
+Markdown documentation.
+
+<Canvas>
+  <Story
+    name="Unchecked"
+    args={{ title: 'hola' }}>
+  </Story>
+</Canvas>
+
+And now prepare another case
+
+<Canvas>
+  <Story
+    name="Second"
+    args={{ title: 'hola' }}>
+  </Story>
+</Canvas>

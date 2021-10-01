@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: 'voxel-card',
   template: `
-    <p>
-      card works!
-    </p>
+    Card works!
+    <p> {{ title }} </p>
+		<img [src]="image" width="100">
   `,
-  styles: [
-  ]
+  styles: []
 })
-export class CardComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class CardComponent {
+  /** Text with the card title */
+  @Input() public title: string = '';
+  /** Image route to be shown in the card header */
+  @Input() public image: string = '';
 }
