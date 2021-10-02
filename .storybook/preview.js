@@ -10,5 +10,11 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  backgrounds: {
+    values: [
+      { name: 'light', value: '#fff' },
+      { name: 'dark', value: '#000' },
+    ],
+  },
   docs: { inlineStories: true },
 }

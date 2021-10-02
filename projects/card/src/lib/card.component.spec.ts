@@ -56,6 +56,24 @@ describe('CardComponent', () => {
     expect(image).not.toExist();
   });
 
+  it('should set image alt if alt input is provided ', () => {
+    const spectator = createComponent({ props: { image: 'test', alt: 'Test!' }});
+    const image = spectator.query(byRole('img'));
+    expect(image).toHaveAttribute('alt', 'Test!');
+  });
+
+  it('should set alt as the title if alt input is NOT provided ', () => {
+    const spectator = createComponent({ props: { image: 'test', title: 'Test!' }});
+    const image = spectator.query(byRole('img'));
+    expect(image).toHaveAttribute('alt', 'Test!');
+  });
+
+  it('should set alt as "Card image" if alt and title inputs are NOT provided ', () => {
+    const spectator = createComponent({ props: { image: 'test' }});
+    const image = spectator.query(byRole('img'));
+    expect(image).toHaveAttribute('alt', 'Card image');
+  });
+
   it('should show featured style if isFeatured is TRUE', () => {
     const spectator = createComponent({ props: { isFeatured: true }});
     expect(spectator.fixture.nativeElement).toHaveAttribute('is-featured', 'true');
