@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CardComponent } from './card.component';
 
@@ -6,6 +7,7 @@ import { CardComponent } from './card.component';
     CardComponent
   ],
   imports: [
+    CommonModule
   ],
   exports: [
     CardComponent
