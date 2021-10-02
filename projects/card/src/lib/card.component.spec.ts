@@ -1,25 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CardComponent } from './card.component';
+import { createComponentFactory } from '@ngneat/spectator';
 
 describe('CardComponent', () => {
-  let component: CardComponent;
-  let fixture: ComponentFixture<CardComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CardComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  const createComponent = createComponentFactory(CardComponent)
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const spectator = createComponent();
+    expect(spectator).toBeTruthy();
   });
 });

@@ -36,6 +36,7 @@
     "@angular/elements": "^12.2.8",
     "@babel/core": "^7.15.5",
     "@compodoc/compodoc": "^1.1.15",
+    "@ngneat/spectator": "^8.1.0",
     "@storybook/addon-actions": "^6.3.9",
     "@storybook/addon-essentials": "^6.3.9",
     "@storybook/addon-links": "^6.3.9",
