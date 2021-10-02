@@ -9,38 +9,59 @@
     "components": [
         {
             "name": "CardComponent",
-            "id": "component-CardComponent-83cab801076fce6c53e67fb5059f452b",
+            "id": "component-CardComponent-ee98b9dc69462c6adbf95e36340735b6",
             "file": "projects/card/src/lib/card.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
             "selector": "voxel-card",
-            "styleUrls": [],
+            "styleUrls": [
+                "./card.component.css"
+            ],
             "styles": [],
-            "template": "  Card works!\n  <p> {{ title }} </p>\n<img [src]=\"image\" width=\"100\">\n",
-            "templateUrl": [],
+            "templateUrl": [
+                "./card.component.html"
+            ],
             "viewProviders": [],
             "inputsClass": [
                 {
+                    "name": "description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "Text with the card description",
+                    "description": "<p>Text with the card description</p>\n",
+                    "line": 13,
+                    "type": "string"
+                },
+                {
                     "name": "image",
-                    "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "Image route to be shown in the card header",
                     "description": "<p>Image route to be shown in the card header</p>\n",
-                    "line": 16,
+                    "line": 15,
                     "type": "string"
                 },
                 {
+                    "name": "isFeatured",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "Reflects the provided value on is-featured attribute",
+                    "description": "<p>Reflects the provided value on is-featured attribute</p>\n",
+                    "line": 17,
+                    "type": "boolean"
+                },
+                {
                     "name": "title",
-                    "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "Text with the card title",
                     "description": "<p>Text with the card title</p>\n",
-                    "line": 14,
+                    "line": 11,
                     "type": "string"
                 }
             ],
@@ -54,22 +75,28 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from \"@angular/core\";\n\n@Component({\n  selector: 'voxel-card',\n  template: `\n    Card works!\n    <p> {{ title }} </p>\n\t\t<img [src]=\"image\" width=\"100\">\n  `,\n  styles: []\n})\nexport class CardComponent {\n  /** Text with the card title */\n  @Input() public title: string = '';\n  /** Image route to be shown in the card header */\n  @Input() public image: string = '';\n}",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input } from \"@angular/core\";\n\n@Component({\n  selector: 'voxel-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.css'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class CardComponent {\n  /** Text with the card title */\n  @Input() public title?: string;\n  /** Text with the card description */\n  @Input() public description?: string;\n  /** Image route to be shown in the card header */\n  @Input() public image?: string;\n  /** Reflects the provided value on is-featured attribute */\n  @HostBinding('attr.is-featured') @Input() public isFeatured: boolean = false;\n}",
             "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": ""
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./card.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<h1 *ngIf=\"title\"> {{ title }} </h1>\n<p *ngIf=\"description\" data-testId=\"description\"> {{ description }} </p>\n<img *ngIf=\"image\" [src]=\"image\">"
         }
     ],
     "modules": [
         {
             "name": "CardModule",
-            "id": "module-CardModule-181b41fb2d3b358c3c8061e834346325",
+            "id": "module-CardModule-f11c787d357a0daf13843954d9c6fe22",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/card/src/lib/card.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CardComponent } from './card.component';\n\n\n\n@NgModule({\n  declarations: [\n    CardComponent\n  ],\n  imports: [\n  ],\n  exports: [\n    CardComponent\n  ]\n})\nexport class CardModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CardComponent } from './card.component';\n\n@NgModule({\n  declarations: [\n    CardComponent\n  ],\n  imports: [\n  ],\n  exports: [\n    CardComponent\n  ]\n})\nexport class CardModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -109,14 +136,14 @@
     "miscellaneous": {
         "variables": [
             {
-                "name": "context",
+                "name": "configureTests",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/card/src/test.ts",
+                "file": "test-config.helper.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                "defaultValue": "(configure: ConfigureFn, compilerOptions: CompilerOptions = {}) => {\n  const compilerConfig: CompilerOptions = {\n    preserveWhitespaces: false,\n    ...compilerOptions,\n  };\n\n  const configuredTestBed = TestBed.configureCompiler(compilerConfig);\n\n  configure(configuredTestBed);\n\n  return configuredTestBed.compileComponents().then(() => configuredTestBed);\n}"
             },
             {
                 "name": "Dark",
@@ -149,13 +176,14 @@
                 "defaultValue": "Template.bind({\n\ttitle: 'Featured'\n})"
             },
             {
-                "name": "require",
+                "name": "mock",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/card/src/test.ts",
+                "file": "setup-jest.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "literal type"
+                "type": "",
+                "defaultValue": "() => {\n  let storage: { [key: string]: string } = {};\n  return {\n    getItem: (key: string) => (key in storage ? storage[key] : null),\n    setItem: (key: string, value: string) => (storage[key] = value || ''),\n    removeItem: (key: string) => delete storage[key],\n    clear: () => (storage = {}),\n  };\n}"
             },
             {
                 "name": "Template",
@@ -169,28 +197,42 @@
             }
         ],
         "functions": [],
-        "typealiases": [],
+        "typealiases": [
+            {
+                "name": "CompilerOptions",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "Partial<literal type>",
+                "file": "test-config.helper.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 176
+            },
+            {
+                "name": "ConfigureFn",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "function",
+                "file": "test-config.helper.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 177
+            }
+        ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/card/src/test.ts": [
+            "test-config.helper.ts": [
                 {
-                    "name": "context",
+                    "name": "configureTests",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/card/src/test.ts",
+                    "file": "test-config.helper.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-                },
-                {
-                    "name": "require",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/card/src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type"
+                    "defaultValue": "(configure: ConfigureFn, compilerOptions: CompilerOptions = {}) => {\n  const compilerConfig: CompilerOptions = {\n    preserveWhitespaces: false,\n    ...compilerOptions,\n  };\n\n  const configuredTestBed = TestBed.configureCompiler(compilerConfig);\n\n  configure(configuredTestBed);\n\n  return configuredTestBed.compileComponents().then(() => configuredTestBed);\n}"
                 }
             ],
             "projects/card/stories/card.stories.ts": [
@@ -234,15 +276,52 @@
                     "type": "Story<CardComponent>",
                     "defaultValue": "(args: CardComponent) => ({\n  props: args,\n})"
                 }
+            ],
+            "setup-jest.ts": [
+                {
+                    "name": "mock",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "setup-jest.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => {\n  let storage: { [key: string]: string } = {};\n  return {\n    getItem: (key: string) => (key in storage ? storage[key] : null),\n    setItem: (key: string, value: string) => (storage[key] = value || ''),\n    removeItem: (key: string) => delete storage[key],\n    clear: () => (storage = {}),\n  };\n}"
+                }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
-        "groupedTypeAliases": {}
+        "groupedTypeAliases": {
+            "test-config.helper.ts": [
+                {
+                    "name": "CompilerOptions",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "Partial<literal type>",
+                    "file": "test-config.helper.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 176
+                },
+                {
+                    "name": "ConfigureFn",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "function",
+                    "file": "test-config.helper.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 177
+                }
+            ]
+        }
     },
     "routes": [],
     "coverage": {
-        "count": 9,
+        "count": 11,
         "status": "low",
         "files": [
             {
@@ -250,29 +329,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CardComponent",
-                "coveragePercent": 66,
-                "coverageCount": "2/3",
-                "status": "good"
-            },
-            {
-                "filePath": "projects/card/src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "context",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/card/src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "require",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 80,
+                "coverageCount": "4/5",
+                "status": "very-good"
             },
             {
                 "filePath": "projects/card/stories/card.stories.ts",
@@ -310,6 +369,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "setup-jest.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "mock",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "test-config.helper.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "configureTests",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
